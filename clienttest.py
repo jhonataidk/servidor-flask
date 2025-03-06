@@ -1,20 +1,27 @@
-import socket
+import requests
 
-def send_login(host='127.0.0.1', port=12345):
-    client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-    client_socket.connect((host, port))
+# URL do servidor Flask
+url = 'http://127.0.0.1:5000/login'
 
-    # Envia login e senha no formato "login:senha"
-    login = input("Digite o login: ")
-    senha = input("Digite a senha: ")
-    message = f"{login}:{senha}"
-    client_socket.send(message.encode('utf-8'))
+# Solicitar login e senha ao usuário
+login = input("Digite seu login: ")
+senha = input("Digite sua senha: ")
 
-    # Recebe a resposta do servidor
-    response = client_socket.recv(1024).decode('utf-8')
-    print(f"Resposta do servidor: {response}")
+# Dados que serão enviados para o servidor
+dados = {
+    'login': login,
+    'senha': senha
+}
 
-    client_socket.close()
+# Enviar a requisição POST
+response = requests.post(url, json=dados)
 
-if __name__ == "__main__":
-    send_login()
+# Verificar se a requisição foi bem-sucedida
+if response.status_code == 200:
+    # Exibir a resposta do servidor
+    resposta_servidor = response.json()
+    print("Resposta do servidor:")
+    print(f"Login: {resposta_servidor['login']}")
+    print(f"Senha: {resposta_servidor['senha']}")
+else:
+    print(f"Erro ao se comunicar com o servidor. Status code: {response.status_code}")
