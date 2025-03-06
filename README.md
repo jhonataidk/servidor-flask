@@ -5,3 +5,4 @@ Gabriel Marques de Freitas - 2210601
 Gustavo Henrique Santos Souza - 2210870
 Jhonata dos Santos Alves - 2210576
 Victor Hugo Nunes Batista de Sousa - 2213188
+Joao Marcelo Gomes Pereira Pinto - 2310685
